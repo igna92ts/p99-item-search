@@ -295,15 +295,16 @@ const classes = [
 ];
 
 const run = async () => {
+  const eqClass = 'Ranger';
   const items = await categories.reduce(async (promise, category) => {
     const accum = await promise;
-    const catItems = await parseCategory('Monk', category);
+    const catItems = await parseCategory(eqClass, category);
     return [...accum, ...catItems];
   });
   // const category = await parseCategory(classes[0], categories[0]);
   // const test = await parseItem({ url: 'https://wiki.project1999.com/Stonemelder%27s_Band' });
   // const items = await parseMonsters({ monsters: [{ zone: 'bla', url: 'https://wiki.project1999.com/Evil_Eye' }]});
-  fs.writeFileSync('items.json', JSON.stringify(items, 0 ,2));
+  fs.writeFileSync(`${eqClass}-items.json`, JSON.stringify(items, 0 ,2));
 };
 
 run();
